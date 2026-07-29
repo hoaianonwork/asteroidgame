@@ -1,8 +1,7 @@
 import pygame
-from constants import LINE_WIDTH, PLAYER_TURN_SPEED
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
-    def __init__(self, x, y, radius):
+    def __init__(self, x: float, y: float, radius: float) -> None:
         # we will be using this later
         if hasattr(self, "containers"):
             super().__init__(self.containers)
@@ -14,7 +13,13 @@ class CircleShape(pygame.sprite.Sprite):
         self.radius = radius
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
+        pass
 
     def update(self, dt):
         pass
+
+    def collides_with(self, other):
+        if self.position.distance_to(other.position) <= (self.radius + other.radius):
+            return True
+        return False
+    
